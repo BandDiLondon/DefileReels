@@ -4,7 +4,7 @@
 // Aucune requête réseau, aucune lecture de cookies, rien n'est stocké ni envoyé.
 // Diagnostic : passer DIAGNOSTIC à true, puis console de la page (F12), préfixe [DefileReels].
 (() => {
-  const DIAGNOSTIC = true;
+  const DIAGNOSTIC = false;
   const log = DIAGNOSTIC ? (...a) => console.log("[DefileReels]", ...a) : () => {};
   let actif = true;
   // Signale l'état à arriere-plan.js (contexte de la page) par un attribut sur <html>.
@@ -108,8 +108,8 @@
     log("onglet caché avec le son : pause jusqu'au retour sur l'onglet (" + raison + ")");
     video.pause();
     const page = location.pathname;
-    // Facebook peut intercepter visibilitychange : on écoute sur window (phase de capture, avant la page) et on
-    // vérifie aussi chaque seconde.
+    // arriere-plan.js bloque visibilitychange (pour que Facebook croie l'onglet visible), ce qui nous le cache
+    // aussi : on vérifie donc chaque seconde, en plus du focus et de visibilitychange.
     let fini = false;
     const terminer = () => {
       fini = true;

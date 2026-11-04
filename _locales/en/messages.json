@@ -1,0 +1,8 @@
+{
+  "nom": { "message": "DefileReels" },
+  "description": { "message": "Automatically moves to the next Facebook Reel when the current one ends. No data collection, no network access." },
+  "interrupteur": { "message": "Auto-scroll" },
+  "passerPubs": { "message": "Skip sponsored Reels" },
+  "note": { "message": "Facebook Reels only." },
+  "credit": { "message": "Code created with Claude (Anthropic), orchestrated by BandDiLondon." }
+}

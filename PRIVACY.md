@@ -1,6 +1,6 @@
 # DefileReels — Règles de confidentialité / Privacy policy
 
-*Dernière mise à jour / Last updated: 2026-11-03*
+*Dernière mise à jour / Last updated: 2026-11-04*
 
 ## Français
 
@@ -14,8 +14,8 @@ DefileReels ne recueille, ne stocke à distance, ne vend et ne transmet **aucune
   affiché, sur place, sans rien conserver ni envoyer.
 - Sur les pages Reels, elle indique à Facebook que l'onglet est visible, pour que la lecture continue en
   arrière-plan.
-- Quand elle recharge la page en arrière-plan, elle note dans le `sessionStorage` de l'onglet si le son était actif,
-  pour le réactiver ; cette note est effacée aussitôt relue.
+- Quand elle recharge la page en arrière-plan, elle note dans le `sessionStorage` de l'onglet si le son était actif ;
+  cette note est effacée aussitôt relue.
 - Les seuls réglages enregistrés sont les deux interrupteurs, gardés **localement** dans votre navigateur
   (`chrome.storage.local`). Ils sont effacés quand vous désinstallez l'extension.
 
@@ -30,7 +30,7 @@ DefileReels collects, remotely stores, sells and transmits **no data at all**.
 - With "Skip sponsored Reels" on, it looks for the "Sponsored" label on the Reel being shown, in place, keeping and
   sending nothing.
 - On Reels pages, it tells Facebook the tab is visible, so playback continues in the background.
-- When it reloads the page in the background, it notes in the tab's `sessionStorage` whether sound was on, to
-  restore it; the note is erased as soon as it is read.
+- When it reloads the page in the background, it notes in the tab's `sessionStorage` whether sound was on; the
+  note is erased as soon as it is read.
 - The only stored settings are the two switches, kept **locally** in your browser (`chrome.storage.local`). They
   are removed when you uninstall the extension.

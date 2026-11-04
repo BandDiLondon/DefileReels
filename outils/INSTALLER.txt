@@ -1,0 +1,44 @@
+DefileReels — installation avant la sortie sur le Chrome Web Store
+===================================================================
+
+FRANÇAIS
+
+1. Extraire ce zip (clic droit > Extraire tout). Placer le dossier « DefileReels » à un endroit où il restera,
+   par exemple Documents. Chrome charge l'extension depuis ce dossier : ne pas le supprimer ni le déplacer ensuite.
+2. Dans Chrome, aller à l'adresse : chrome://extensions
+3. Activer « Mode développeur » (en haut à droite).
+4. Cliquer « Charger l'extension non empaquetée » et choisir le dossier « DefileReels »
+   (celui qui contient manifest.json).
+5. Épingler l'icône (pièce de casse-tête dans la barre) pour avoir les interrupteurs.
+6. Recharger les onglets Facebook déjà ouverts (F5).
+
+Bloqueur de pubs (AdBlock…) : mettre facebook.com dans sa liste blanche, sinon il peut vider la page sur les Reels
+commandités. DefileReels saute déjà les pubs.
+
+Fonctionne aussi dans Edge (edge://extensions) et Brave (brave://extensions).
+Pas de mise à jour automatique dans ce mode : pour une nouvelle version, remplacer le contenu du dossier puis
+cliquer « Recharger » sur la carte de l'extension.
+
+Aucune donnée recueillie, aucune requête réseau. Code : https://github.com/BandDiLondon/DefileReels
+Code créé avec Claude (Anthropic), orchestré par BandDiLondon.
+
+
+ENGLISH
+
+1. Extract this zip (right-click > Extract All). Put the "DefileReels" folder somewhere it will stay, e.g.
+   Documents. Chrome loads the extension from that folder: do not delete or move it afterwards.
+2. In Chrome, go to: chrome://extensions
+3. Turn on "Developer mode" (top right).
+4. Click "Load unpacked" and pick the "DefileReels" folder (the one containing manifest.json).
+5. Pin the icon (puzzle piece in the toolbar) to get the switches.
+6. Reload any Facebook tabs already open (F5).
+
+Ad blockers (AdBlock...): allow-list facebook.com, otherwise it may blank the page on sponsored Reels.
+DefileReels already skips the ads.
+
+Also works in Edge (edge://extensions) and Brave (brave://extensions).
+No automatic updates in this mode: for a new version, replace the folder contents and click "Reload" on the
+extension card.
+
+No data collected, no network requests. Code: https://github.com/BandDiLondon/DefileReels
+Code created with Claude (Anthropic), orchestrated by BandDiLondon.

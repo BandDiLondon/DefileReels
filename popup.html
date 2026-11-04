@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+<html>
 <head>
   <meta charset="utf-8">
   <style>
@@ -10,10 +10,10 @@
   </style>
 </head>
 <body>
-  <label><input type="checkbox" id="actif"> Défilement automatique</label>
-  <label><input type="checkbox" id="passerPubs"> Passer les Reels commandités</label>
-  <p>Reels Facebook seulement.</p>
-  <p class="credit">Code créé avec Claude (Anthropic), orchestré par BandDiLondon.</p>
+  <label><input type="checkbox" id="actif"> <span data-msg="interrupteur"></span></label>
+  <label><input type="checkbox" id="passerPubs"> <span data-msg="passerPubs"></span></label>
+  <p data-msg="note"></p>
+  <p class="credit" data-msg="credit"></p>
   <script src="popup.js"></script>
 </body>
 </html>

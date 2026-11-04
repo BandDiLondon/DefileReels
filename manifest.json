@@ -1,9 +1,11 @@
 {
   "manifest_version": 3,
-  "name": "DefileReels",
-  "version": "0.6.4",
+  "name": "__MSG_nom__",
+  "short_name": "DefileReels",
+  "version": "1.0.0",
   "minimum_chrome_version": "111",
-  "description": "Passe automatiquement au Reel Facebook suivant à la fin de chaque vidéo. Aucune collecte de données, aucun accès réseau.",
+  "description": "__MSG_description__",
+  "default_locale": "fr",
   "permissions": ["storage"],
   "icons": {
     "16": "icons/icon16.png",
@@ -13,7 +15,7 @@
   },
   "action": {
     "default_popup": "popup.html",
-    "default_title": "DefileReels",
+    "default_title": "__MSG_nom__",
     "default_icon": { "16": "icons/icon16.png", "32": "icons/icon32.png" }
   },
   "content_scripts": [
