@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "DefileReels",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "minimum_chrome_version": "111",
   "description": "Passe automatiquement au Reel Facebook suivant à la fin de chaque vidéo. Aucune collecte de données, aucun accès réseau.",
   "permissions": ["storage"],

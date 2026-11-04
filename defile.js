@@ -35,34 +35,64 @@
 
   // Après un rechargement fait par nous en arrière-plan, Facebook démarre en sourdine (page chargée sans
   // clic). Si le son était actif avant, on le réactive : bouton de son de Facebook, sinon la vidéo elle-même.
-  // Si Chrome refuse (la vidéo se met en pause), on revient en sourdine pour que la lecture continue.
+  // Si Chrome refuse (la vidéo se met en pause), on revient en sourdine pour que la lecture continue, et on
+  // réessaie quand l'onglet redevient visible.
+  // Il faut passer par le bouton de Facebook : réactiver seulement la vidéo laisse le lecteur de Facebook en
+  // sourdine, et il coupe alors le son de tous les Reels suivants.
   const CLE_SON = "defileReels.son";
+  function trouverBoutonSon() {
+    const selecteurs = [
+      "[role='button'][aria-label='Réactiver']",        // Facebook en français
+      "[role='button'][aria-label='Activer le son']",
+      "[role='button'][aria-label='Unmute']",
+      "[role='button'][aria-label*='activer le son' i]",
+      "[role='button'][aria-label*='unmute' i]"
+    ];
+    for (const s of selecteurs) {
+      const b = [...document.querySelectorAll(s)].find(visible);
+      if (b) return b;
+    }
+    return null;
+  }
   function reactiverSon() {
     let demande = null;
     try { demande = sessionStorage.getItem(CLE_SON); sessionStorage.removeItem(CLE_SON); } catch (e) {}
     if (demande !== "1") return;
     const limite = Date.now() + 15000;
-    const surLecture = (e) => {
-      const v = e.target;
-      if (!(v instanceof HTMLVideoElement) || !surReels()) return;
-      if (Date.now() > limite) { document.removeEventListener("playing", surLecture, true); return; }
-      if (!v.muted) { document.removeEventListener("playing", surLecture, true); log("son déjà actif"); return; }
-      document.removeEventListener("playing", surLecture, true);
-      const bouton = [...document.querySelectorAll(
-        "[role='button'][aria-label='Activer le son'], [role='button'][aria-label='Unmute'], " +
-        "[role='button'][aria-label*='activer le son' i], [role='button'][aria-label*='unmute' i]"
-      )].find(visible);
-      if (bouton) { log("clic sur :", bouton.getAttribute("aria-label")); bouton.click(); }
+
+    const essayer = (v, quand) => {
+      const bouton = trouverBoutonSon();
+      if (bouton) { log("clic sur :", bouton.getAttribute("aria-label"), "(" + quand + ")"); bouton.click(); }
+      else log("bouton de son de Facebook introuvable (" + quand + ")");
       setTimeout(() => {
-        if (v.muted) { log("son réactivé directement sur la vidéo"); v.muted = false; }
+        if (v.muted) {
+          log("son réactivé directement sur la vidéo (les Reels suivants risquent d'être muets)");
+          v.muted = false;
+        }
         setTimeout(() => {
           if (v.paused) {
-            log("Chrome refuse le son sans clic : lecture en sourdine");
+            log("Chrome refuse le son sans clic : lecture en sourdine, nouvel essai au retour sur l'onglet");
             v.muted = true;
             v.play().catch(() => {});
+            const auRetour = () => {
+              if (document.hidden) return;
+              document.removeEventListener("visibilitychange", auRetour);
+              const video = [...document.querySelectorAll("video")].find((x) => visible(x) && !x.paused) || v;
+              if (video.muted) essayer(video, "retour sur l'onglet");
+            };
+            document.addEventListener("visibilitychange", auRetour);
           } else log("son actif :", !v.muted);
         }, 600);
       }, 400);
+    };
+
+    const surLecture = (e) => {
+      const v = e.target;
+      if (!(v instanceof HTMLVideoElement) || !surReels()) return;
+      document.removeEventListener("playing", surLecture, true);
+      if (Date.now() > limite) return;
+      if (!v.muted) { log("son déjà actif"); return; }
+      essayer(v, "après rechargement");
     };
     document.addEventListener("playing", surLecture, true);
   }
@@ -178,13 +208,16 @@
     const page = location.pathname;
     // Attendre que Facebook affiche la mention (1,5 s), et que la protection anti-double-saut soit levée,
     // sinon suivant() ignorerait la demande.
+    // Après un rechargement, la mention arrive parfois plus tard : on revérifie à +2,5 s et +5 s.
     const delai = Math.max(1500, bloqueJusqua - Date.now() + 150);
-    setTimeout(() => {
+    const verifier = (essai) => {
       if (v.paused || v.currentSrc !== src || location.pathname !== page) return;
-      if (DIAGNOSTIC) diagnostic(v);
+      if (DIAGNOSTIC && essai === 1) diagnostic(v);
       const ou = estCommandite(v);
-      if (ou) { log("Reel commandité (" + ou + ") : on passe"); suivant("commandité", v); }
-    }, delai);
+      if (ou) { log("Reel commandité (" + ou + ", essai " + essai + ") : on passe"); suivant("commandité", v); }
+      else if (essai < 3) setTimeout(() => verifier(essai + 1), 2500);
+    };
+    setTimeout(() => verifier(1), delai);
   }, true);
 
   document.addEventListener("ended", (e) => {
