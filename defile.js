@@ -98,7 +98,48 @@
   }
   reactiverSon();
 
+  // Onglet caché avec le son : passer au suivant demande un rechargement, après lequel Chrome ne joue pas le son
+  // tant que l'onglet n'est pas affiché. Plutôt que de défiler des Reels dans le vide, on met en pause et on
+  // attend le retour sur l'onglet. Sans son, le défilement continue en arrière-plan.
+  let enAttenteRetour = false;
+  function attendreRetour(raison, video) {
+    if (enAttenteRetour) return;
+    enAttenteRetour = true;
+    log("onglet caché avec le son : pause jusqu'au retour sur l'onglet (" + raison + ")");
+    video.pause();
+    const page = location.pathname;
+    // Facebook peut intercepter visibilitychange : on écoute sur window (phase de capture, avant la page) et on
+    // vérifie aussi chaque seconde.
+    let fini = false;
+    const terminer = () => {
+      fini = true;
+      enAttenteRetour = false;
+      clearInterval(minuterie);
+      video.removeEventListener("play", verifier, true);
+      window.removeEventListener("visibilitychange", verifier, true);
+      window.removeEventListener("focus", verifier, true);
+    };
+    const verifier = () => {
+      if (fini) return;
+      if (location.pathname !== page) { terminer(); log("attente annulée : Reel changé"); return; }
+      if (document.hidden) {
+        if (!video.paused) { log("Facebook relance la vidéo en arrière-plan : nouvelle pause"); video.pause(); }
+        return;
+      }
+      terminer();
+      log("retour sur l'onglet : on passe au Reel suivant");
+      suivant(raison + ", au retour", null);
+    };
+    const minuterie = setInterval(verifier, 1000);
+    // La minuterie est ralentie en arrière-plan : on réagit aussi tout de suite quand Facebook relance la vidéo.
+    video.addEventListener("play", verifier, true);
+    window.addEventListener("visibilitychange", verifier, true);
+    window.addEventListener("focus", verifier, true);
+  }
+
   function suivant(raison, video) {
+    if (enAttenteRetour) return;
+    if (document.hidden && video && !video.muted && actif) { attendreRetour(raison, video); return; }
     if (Date.now() < bloqueJusqua) { log("demande ignorée (" + raison + ") : saut trop récent"); return; }
     bloqueJusqua = Date.now() + 2500; // évite de sauter deux Reels d'un coup
     const depart = location.href;
