@@ -43,7 +43,9 @@ Extension Chrome qui passe automatiquement au Reel Facebook suivant quand la vid
 
 ### Installer
 
-Pas encore sur le Chrome Web Store. Télécharger `DefileReels-<version>-installation.zip` dans la
+**Chrome Web Store** : [installer DefileReels](https://chromewebstore.google.com/detail/defilereels/cpdfekbpkebemejomgoicdplhnkaoklg) (mises à jour automatiques).
+
+Ou à la main : télécharger `DefileReels-<version>-installation.zip` dans la
 [dernière release](https://github.com/BandDiLondon/DefileReels/releases/latest) et suivre `INSTALLER.txt`, en bref :
 extraire, `chrome://extensions` → **Mode développeur** → **Charger l'extension non empaquetée** → choisir le dossier
 `DefileReels`. Ne pas le déplacer ensuite. Mise à jour : remplacer le contenu du dossier, **Recharger** sur la carte
@@ -82,7 +84,9 @@ Chrome extension that automatically moves to the next Facebook Reel when the cur
 
 ### Install
 
-Not on the Chrome Web Store yet. Download `DefileReels-<version>-installation.zip` from the
+**Chrome Web Store**: [install DefileReels](https://chromewebstore.google.com/detail/defilereels/cpdfekbpkebemejomgoicdplhnkaoklg) (automatic updates).
+
+Or manually: download `DefileReels-<version>-installation.zip` from the
 [latest release](https://github.com/BandDiLondon/DefileReels/releases/latest) and follow `INSTALLER.txt`, in short:
 extract, `chrome://extensions` → **Developer mode** → **Load unpacked** → pick the `DefileReels` folder. Do not move
 it afterwards. To update: replace the folder contents, click **Reload** on the extension card, then F5 on Facebook.
