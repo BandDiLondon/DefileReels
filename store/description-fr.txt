@@ -1,0 +1,12 @@
+DefileReels passe automatiquement au Reel Facebook suivant quand la vidéo en cours se termine. Plus besoin de faire défiler à la main.
+
+• Un interrupteur dans la barre d'outils pour activer ou couper le défilement.
+• Option pour passer les Reels commandités.
+• Fonctionne seulement sur les Reels de facebook.com.
+• Continue même quand l'onglet est en arrière-plan, et garde le son d'un Reel à l'autre.
+• Aucune donnée recueillie, aucune requête réseau, aucun cookie lu : tout se passe dans votre navigateur.
+• Code court et lisible, sous licence libre GPL-3.0.
+
+Transparence : code créé avec Claude (Anthropic), une IA, orchestré par BandDiLondon, qui a défini le besoin, testé et validé chaque version.
+
+DefileReels est un projet indépendant, sans lien avec Facebook ni Meta.

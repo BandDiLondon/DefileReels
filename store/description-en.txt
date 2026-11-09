@@ -1,0 +1,12 @@
+DefileReels automatically moves to the next Facebook Reel when the current one ends. No more manual scrolling.
+
+• A toolbar switch to turn auto-scroll on or off.
+• Option to skip sponsored Reels.
+• Works only on facebook.com Reels.
+• Keeps going when the tab is in the background, and keeps the sound on from one Reel to the next.
+• No data collected, no network requests, no cookies read: everything stays in your browser.
+• Short, readable code, free software under GPL-3.0.
+
+Transparency: code created with Claude (Anthropic), an AI, orchestrated by BandDiLondon, who defined the need and tested and approved every version.
+
+DefileReels is an independent project, not affiliated with Facebook or Meta.
